@@ -1,9 +1,11 @@
-package com.api.domain.model;
+package com.api.domain.model.auth;
 
+import com.api.domain.model.common.Pessoa;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 
@@ -12,8 +14,13 @@ public class Usuario implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @OneToOne
+    @JoinColumn(name ="id_pessoa")
+    private Pessoa pessoa;
     private String email;
     private String password;
+    @Column(name = "data_criacao")
+    private LocalDateTime dataCriacao = LocalDateTime.now();
 
     @ManyToMany(fetch = FetchType.EAGER)
     private List<PerfilUsuario> perfis;
@@ -24,6 +31,14 @@ public class Usuario implements UserDetails {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Pessoa getPessoa() {
+        return pessoa;
+    }
+
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
     }
 
     public String getEmail() {

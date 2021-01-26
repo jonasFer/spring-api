@@ -1,13 +1,12 @@
 package com.api.config.security;
 
-import com.api.domain.model.Usuario;
+import com.api.domain.model.auth.Usuario;
 import com.api.domain.repository.UsuarioRepository;
 import com.api.rest.dto.TokenDto;
 import com.api.rest.dto.UsuarioDto;
 import com.api.rest.dto.UsuarioLoginDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;

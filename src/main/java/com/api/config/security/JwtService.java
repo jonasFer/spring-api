@@ -1,6 +1,6 @@
 package com.api.config.security;
 
-import com.api.domain.model.Usuario;
+import com.api.domain.model.auth.Usuario;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;

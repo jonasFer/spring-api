@@ -1,6 +1,6 @@
 package com.api.rest.dto;
 
-import com.api.domain.model.Usuario;
+import com.api.domain.model.auth.Usuario;
 
 public class UsuarioDto {
     private Long id;
