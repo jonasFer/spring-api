@@ -28,3 +28,16 @@ INSERT INTO PERFIL_FUNCIONALIDADE (id, id_perfil, id_funcionalidade) VALUES (2, 
 INSERT INTO PERFIL_FUNCIONALIDADE (id, id_perfil, id_funcionalidade) VALUES (3, 2, 3);
 INSERT INTO PERFIL_FUNCIONALIDADE (id, id_perfil, id_funcionalidade) VALUES (4, 3, 4);
 
+
+INSERT INTO ESPECIE (id, id_empresa, nome) VALUES (1, 1, 'Cão');
+INSERT INTO ESPECIE (id, id_empresa, nome) VALUES (2, 1, 'Gato');
+INSERT INTO ESPECIE (id, id_empresa, nome) VALUES (3, 1, 'Rato');
+INSERT INTO ESPECIE (id, id_empresa, nome) VALUES (4, 1, 'Cão');
+INSERT INTO ESPECIE (id, id_empresa, nome) VALUES (5, 1, 'Gato');
+INSERT INTO ESPECIE (id, id_empresa, nome) VALUES (6, 1, 'Rato');
+INSERT INTO ESPECIE (id, id_empresa, nome) VALUES (7, 1, 'Cão');
+INSERT INTO ESPECIE (id, id_empresa, nome) VALUES (8, 1, 'Gato');
+INSERT INTO ESPECIE (id, id_empresa, nome) VALUES (9, 1, 'Rato');
+INSERT INTO ESPECIE (id, id_empresa, nome) VALUES (10, 1, 'Cão');
+INSERT INTO ESPECIE (id, id_empresa, nome) VALUES (11, 1, 'Gato');
+INSERT INTO ESPECIE (id, id_empresa, nome) VALUES (12, 1, 'Rato');
