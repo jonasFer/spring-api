@@ -3,7 +3,6 @@ package com.api.rest.controller.pet;
 import com.api.builder.model.pet.EspecieBuilder;
 import com.api.rest.dto.pet.EspecieDto;
 import com.api.service.EspecieService;
-import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -12,9 +11,8 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Api(tags = "Espécie")
 @RestController
-@RequestMapping("especie")
+@RequestMapping("pet/especie")
 public class EspecieController {
 
     @Autowired

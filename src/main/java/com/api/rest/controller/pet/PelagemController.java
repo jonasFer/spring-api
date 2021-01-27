@@ -12,9 +12,9 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Api(tags = "Pelagem")
+@Api(tags = "Pet")
 @RestController
-@RequestMapping("pelagem")
+@RequestMapping("pet/pelagem")
 public class PelagemController {
     @Autowired
     private PelagemService service;

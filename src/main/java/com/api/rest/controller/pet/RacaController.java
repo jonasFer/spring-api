@@ -12,9 +12,9 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Api(tags = "Raça")
+@Api(tags = "Pet")
 @RestController
-@RequestMapping("raca")
+@RequestMapping("pet/raca")
 public class RacaController {
 
     @Autowired

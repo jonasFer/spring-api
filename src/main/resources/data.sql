@@ -31,13 +31,12 @@ INSERT INTO PERFIL_FUNCIONALIDADE (id, id_perfil, id_funcionalidade) VALUES (4, 
 
 INSERT INTO ESPECIE (id, id_empresa, nome) VALUES (1, 1, 'Cão');
 INSERT INTO ESPECIE (id, id_empresa, nome) VALUES (2, 1, 'Gato');
-INSERT INTO ESPECIE (id, id_empresa, nome) VALUES (3, 1, 'Rato');
-INSERT INTO ESPECIE (id, id_empresa, nome) VALUES (4, 1, 'Cão');
-INSERT INTO ESPECIE (id, id_empresa, nome) VALUES (5, 1, 'Gato');
-INSERT INTO ESPECIE (id, id_empresa, nome) VALUES (6, 1, 'Rato');
-INSERT INTO ESPECIE (id, id_empresa, nome) VALUES (7, 1, 'Cão');
-INSERT INTO ESPECIE (id, id_empresa, nome) VALUES (8, 1, 'Gato');
-INSERT INTO ESPECIE (id, id_empresa, nome) VALUES (9, 1, 'Rato');
-INSERT INTO ESPECIE (id, id_empresa, nome) VALUES (10, 1, 'Cão');
-INSERT INTO ESPECIE (id, id_empresa, nome) VALUES (11, 1, 'Gato');
-INSERT INTO ESPECIE (id, id_empresa, nome) VALUES (12, 1, 'Rato');
+
+INSERT INTO RACA (id, id_especie, nome) VALUES (1, 2, 'Raça de Gato');
+INSERT INTO RACA (id, id_especie, nome) VALUES (2, 1, 'Raça de Cão');
+
+INSERT INTO PELAGEM (id, id_empresa, nome) VALUES (1, 1, 'Pelagem 1');
+INSERT INTO PELAGEM (id, id_empresa, nome) VALUES (2, 1, 'Pelagem 2');
+
+INSERT INTO ANIMAL (id, id_pessoa, nome, sexo, data_nascimento, id_especie, id_raca, id_pelagem) VALUES (1, 1, 'Animal 1', 'M', NOW(), 1, 2, 1);
+INSERT INTO ANIMAL (id, id_pessoa, nome, sexo, data_nascimento, id_especie, id_raca, id_pelagem) VALUES (2, 1, 'Animal 2', 'F', NOW(), 2, 1, 2);
