@@ -5,8 +5,6 @@ import com.api.domain.repository.pet.EspecieRepository;
 import com.api.service.EspecieService;
 import com.api.service.impl.BaseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;

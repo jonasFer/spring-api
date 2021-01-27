@@ -1,28 +1,21 @@
 package com.api.domain.model.pet;
 
-import com.api.domain.model.common.Empresa;
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-public class Especie {
+public class Raca {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
-    @JoinColumn(name ="id_empresa", nullable = false)
-    private Empresa empresa;
+    @JoinColumn(name = "id_especie")
+    private Especie especie;
     private String nome;
     @Column(name = "data_criacao")
     private LocalDateTime dataCriacao = LocalDateTime.now();
 
-    public Especie() {}
-
-    public Especie(Long id, String nome) {
-        this.id = id;
-        this.nome = nome;
-    }
+    public Raca() { }
 
     public Long getId() {
         return id;
@@ -32,12 +25,12 @@ public class Especie {
         this.id = id;
     }
 
-    public Empresa getEmpresa() {
-        return empresa;
+    public Especie getEspecie() {
+        return especie;
     }
 
-    public void setEmpresa(Empresa empresa) {
-        this.empresa = empresa;
+    public void setEspecie(Especie especie) {
+        this.especie = especie;
     }
 
     public String getNome() {

@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-public class Especie {
+public class Pelagem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -17,9 +17,9 @@ public class Especie {
     @Column(name = "data_criacao")
     private LocalDateTime dataCriacao = LocalDateTime.now();
 
-    public Especie() {}
+    public Pelagem() {}
 
-    public Especie(Long id, String nome) {
+    public Pelagem(Long id, String nome) {
         this.id = id;
         this.nome = nome;
     }
