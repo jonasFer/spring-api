@@ -2,6 +2,7 @@ package com.api.rest.controller.auth;
 
 import com.api.config.security.AuthServiceImpl;
 import com.api.rest.dto.TokenDto;
+import com.api.rest.dto.UsuarioDto;
 import com.api.rest.dto.UsuarioLoginDto;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,5 +20,12 @@ public class AuthController {
     @ResponseStatus(HttpStatus.OK)
     public TokenDto auth(@RequestBody UsuarioLoginDto loginDto) {
         return authService.autenticar(loginDto);
+    }
+
+    @GetMapping("me")
+    @ResponseStatus(HttpStatus.OK)
+    public UsuarioDto me(@RequestParam String token)
+    {
+        return  authService.findByToken(token);
     }
 }

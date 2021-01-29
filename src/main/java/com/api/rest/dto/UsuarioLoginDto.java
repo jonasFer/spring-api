@@ -4,6 +4,8 @@ public class UsuarioLoginDto {
     private String email;
     private String senha;
 
+    public UsuarioLoginDto() { }
+
     public UsuarioLoginDto(String email, String senha) {
         this.email = email;
         this.senha = senha;

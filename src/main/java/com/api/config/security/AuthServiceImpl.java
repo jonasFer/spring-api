@@ -29,7 +29,7 @@ public class AuthServiceImpl implements UserDetailsService {
             usuario.setPassword(loginDto.getSenha());
             Usuario user = this.validar(usuario);
 
-            return new TokenDto(jwtService.gerarToken(user), new UsuarioDto(user));
+            return new TokenDto(jwtService.gerarToken(user));
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, e.getMessage());
         }
@@ -51,5 +51,13 @@ public class AuthServiceImpl implements UserDetailsService {
                 .orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado na base de dados."));
 
         return usuario;
+    }
+
+    public UsuarioDto findByToken(String token)
+    {
+        String email = jwtService.obterLoginUsuario(token);
+        Usuario usuario = loadUserByUsername(email);
+
+        return new UsuarioDto(usuario);
     }
 }
