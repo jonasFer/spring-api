@@ -54,4 +54,9 @@ public class PelagemServiceImpl extends BaseServiceImpl implements PelagemServic
                     return Void.TYPE;
                 }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Pelagem não encontrada"));
     }
+
+    @Override
+    public long countRegisters() {
+        return repository.countByEmpresa(this.getEmpresaLogada());
+    }
 }

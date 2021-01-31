@@ -5,6 +5,7 @@ import com.api.domain.repository.pet.EspecieRepository;
 import com.api.service.EspecieService;
 import com.api.service.impl.BaseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -24,8 +25,8 @@ public class EspecieServiceImpl extends BaseServiceImpl implements EspecieServic
     }
 
     @Override
-    public List<Especie> all() {
-        return repository.findByEmpresa(this.getEmpresaLogada());
+    public List<Especie> all(Pageable pageable) {
+        return repository.findByEmpresa(this.getEmpresaLogada(), pageable);
     }
 
     @Override
@@ -52,5 +53,10 @@ public class EspecieServiceImpl extends BaseServiceImpl implements EspecieServic
                     repository.delete(especie);
                     return Void.TYPE;
                 }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Espécie não encontrada"));
+    }
+
+    @Override
+    public long allRegisters() {
+        return repository.countFromEmpresa(this.getEmpresaLogada());
     }
 }

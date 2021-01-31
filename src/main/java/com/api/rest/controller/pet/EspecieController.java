@@ -1,10 +1,14 @@
 package com.api.rest.controller.pet;
 
-import com.api.builder.model.pet.EspecieBuilder;
+import com.api.application.builder.model.pet.EspecieBuilder;
+import com.api.rest.dto.PageDto;
 import com.api.rest.dto.pet.EspecieDto;
 import com.api.service.EspecieService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,10 +28,12 @@ public class EspecieController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<EspecieDto> all()
+    public PageDto all(
+        @PageableDefault(sort = "dataCriacao", direction = Sort.Direction.DESC, page = 0, size = 10)Pageable pageable
+    )
     {
-        return service
-                .all()
+        List<EspecieDto> list = service
+                .all(pageable)
                 .stream()
                 .map(especie -> {
                     EspecieDto dto = new EspecieDto();
@@ -37,6 +43,8 @@ public class EspecieController {
                     return dto;
                 })
                 .collect(Collectors.toList());
+
+        return new PageDto( service.allRegisters(), list);
     }
 
     @GetMapping("{id}")

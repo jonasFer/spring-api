@@ -14,6 +14,7 @@ import java.util.List;
 
 @Service
 public class RacaServiceImpl extends BaseServiceImpl implements RacaService {
+
     @Autowired
     private RacaRepository racaRepository;
     @Autowired
@@ -61,5 +62,10 @@ public class RacaServiceImpl extends BaseServiceImpl implements RacaService {
                     return Void.TYPE;
                 })
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Raça não encontrada"));
+    }
+
+    @Override
+    public long allRegisters() {
+        return racaRepository.countByEspecieEmpresa(this.getEmpresaLogada());
     }
 }

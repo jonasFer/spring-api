@@ -1,4 +1,4 @@
-package com.api.builder.model;
+package com.api.application.builder.model;
 
 import com.api.domain.model.common.Menu;
 import com.api.rest.dto.common.MenuDto;

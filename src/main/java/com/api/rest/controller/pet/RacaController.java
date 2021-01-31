@@ -1,6 +1,7 @@
 package com.api.rest.controller.pet;
 
-import com.api.builder.model.pet.RacaBuilder;
+import com.api.application.builder.model.pet.RacaBuilder;
+import com.api.rest.dto.PageDto;
 import com.api.rest.dto.pet.RacaDto;
 import com.api.service.RacaService;
 import io.swagger.annotations.Api;
@@ -40,12 +41,14 @@ public class RacaController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<RacaDto> all() {
-        return racaService
+    public PageDto all() {
+        List<RacaDto> list = racaService
                 .all()
                 .stream()
                 .map(raca -> builder.buildDtoFromEntity(raca))
                 .collect(Collectors.toList());
+
+        return new PageDto(racaService.allRegisters(), list);
     }
 
     @PostMapping

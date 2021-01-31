@@ -1,6 +1,7 @@
 package com.api.rest.controller.pet;
 
-import com.api.builder.model.pet.AnimalBuilder;
+import com.api.application.builder.model.pet.AnimalBuilder;
+import com.api.rest.dto.PageDto;
 import com.api.rest.dto.pet.AnimalDto;
 import com.api.service.AnimalService;
 import io.swagger.annotations.Api;
@@ -30,8 +31,8 @@ public class AnimalController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<AnimalDto> all() {
-        return animalService
+    public PageDto all() {
+        List<AnimalDto> list = animalService
                 .all()
                 .stream()
                 .map(animal -> {
@@ -43,6 +44,8 @@ public class AnimalController {
                     return null;
                 })
                 .collect(Collectors.toList());
+
+        return new PageDto(animalService.allRegisters(), list);
     }
 
     @PostMapping

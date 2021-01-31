@@ -10,4 +10,5 @@ public interface AnimalService {
     Animal create(Animal animal);
     Animal update(Long id, Animal animal);
     void delete(Long id);
+    long allRegisters();
 }

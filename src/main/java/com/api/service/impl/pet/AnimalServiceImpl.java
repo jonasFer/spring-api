@@ -13,6 +13,7 @@ import java.util.List;
 
 @Service
 public class AnimalServiceImpl extends BaseServiceImpl implements AnimalService {
+
     @Autowired
     private AnimalRepository animalRepository;
 
@@ -60,5 +61,10 @@ public class AnimalServiceImpl extends BaseServiceImpl implements AnimalService 
                     return Void.TYPE;
                 })
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Animal não encontrado"));
+    }
+
+    @Override
+    public long allRegisters() {
+        return animalRepository.countByPessoaEmpresa(this.getEmpresaLogada());
     }
 }

@@ -1,4 +1,4 @@
-package com.api.builder.model.pet;
+package com.api.application.builder.model.pet;
 
 import com.api.domain.model.pet.Raca;
 import com.api.rest.dto.pet.RacaDto;

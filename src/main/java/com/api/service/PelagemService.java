@@ -10,4 +10,5 @@ public interface PelagemService {
     Pelagem save(Pelagem pelagem);
     Pelagem update(Long id, Pelagem pelagem);
     void delete(Long id);
+    long countRegisters();
 }

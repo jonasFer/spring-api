@@ -1,6 +1,8 @@
 INSERT INTO EMPRESA(id) VALUES (1);
+INSERT INTO EMPRESA(id) VALUES (2);
 
-INSERT INTO PESSOA(id_empresa, nome) VALUES (1, 'Jonas');
+INSERT INTO PESSOA(id, id_empresa, nome) VALUES (1, 1, 'Jonas');
+INSERT INTO PESSOA(id, id_empresa, nome) VALUES (2, 2, 'Marciele');
 
 INSERT INTO USUARIO(id_pessoa, email, password) VALUES(1, 'jonas@email.com', '$2a$10$sFKmbxbG4ryhwPNx/l3pgOJSt.fW1z6YcUnuE2X8APA/Z3NI/oSpq');
 
@@ -29,14 +31,20 @@ INSERT INTO PERFIL_FUNCIONALIDADE (id, id_perfil, id_funcionalidade) VALUES (3, 
 INSERT INTO PERFIL_FUNCIONALIDADE (id, id_perfil, id_funcionalidade) VALUES (4, 3, 4);
 
 
-INSERT INTO ESPECIE (id, id_empresa, nome) VALUES (1, 1, 'Cão');
-INSERT INTO ESPECIE (id, id_empresa, nome) VALUES (2, 1, 'Gato');
+INSERT INTO ESPECIE (id, id_empresa, nome) VALUES (1, 1, 'Espécie 1');
+INSERT INTO ESPECIE (id, id_empresa, nome) VALUES (2, 1, 'Espécie 2');
+INSERT INTO ESPECIE (id, id_empresa, nome) VALUES (3, 2, 'Espécie 3');
+INSERT INTO ESPECIE (id, id_empresa, nome) VALUES (4, 1, 'Espécie 4');
+INSERT INTO ESPECIE (id, id_empresa, nome) VALUES (5, 2, 'Espécie 5');
 
 INSERT INTO RACA (id, id_especie, nome) VALUES (1, 2, 'Raça de Gato');
 INSERT INTO RACA (id, id_especie, nome) VALUES (2, 1, 'Raça de Cão');
+INSERT INTO RACA (id, id_especie, nome) VALUES (3, 2, 'Raça de Cãos');
 
 INSERT INTO PELAGEM (id, id_empresa, nome) VALUES (1, 1, 'Pelagem 1');
 INSERT INTO PELAGEM (id, id_empresa, nome) VALUES (2, 1, 'Pelagem 2');
+INSERT INTO PELAGEM (id, id_empresa, nome) VALUES (3, 2, 'Pelagem 3');
 
 INSERT INTO ANIMAL (id, id_pessoa, nome, sexo, data_nascimento, id_especie, id_raca, id_pelagem) VALUES (1, 1, 'Animal 1', 'M', NOW(), 1, 2, 1);
 INSERT INTO ANIMAL (id, id_pessoa, nome, sexo, data_nascimento, id_especie, id_raca, id_pelagem) VALUES (2, 1, 'Animal 2', 'F', NOW(), 2, 1, 2);
+INSERT INTO ANIMAL (id, id_pessoa, nome, sexo, data_nascimento, id_especie, id_raca, id_pelagem) VALUES (3, 2, 'Animal 3', 'F', NOW(), 2, 1, 2);

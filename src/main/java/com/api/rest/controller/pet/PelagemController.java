@@ -1,6 +1,7 @@
 package com.api.rest.controller.pet;
 
-import com.api.builder.model.pet.PelagemBuilder;
+import com.api.application.builder.model.pet.PelagemBuilder;
+import com.api.rest.dto.PageDto;
 import com.api.rest.dto.pet.PelagemDto;
 import com.api.service.PelagemService;
 import io.swagger.annotations.Api;
@@ -23,9 +24,9 @@ public class PelagemController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<PelagemDto> all()
+    public PageDto all()
     {
-        return service
+        List<PelagemDto> list = service
                 .all()
                 .stream()
                 .map(especie -> {
@@ -36,6 +37,7 @@ public class PelagemController {
                     return dto;
                 })
                 .collect(Collectors.toList());
+        return new PageDto( service.countRegisters(), list);
     }
 
     @GetMapping("{id}")

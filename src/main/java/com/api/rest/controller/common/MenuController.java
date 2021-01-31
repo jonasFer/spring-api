@@ -1,6 +1,6 @@
 package com.api.rest.controller.common;
 
-import com.api.builder.model.MenuBuilder;
+import com.api.application.builder.model.MenuBuilder;
 import com.api.rest.dto.common.MenuDto;
 import com.api.service.MenuService;
 import io.swagger.annotations.Api;
@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 

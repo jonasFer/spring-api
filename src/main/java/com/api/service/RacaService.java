@@ -11,4 +11,5 @@ public interface RacaService {
     Raca create(Raca racaDto);
     Raca update(Long id, Raca racaDto);
     void delete(Long id);
+    long allRegisters();
 }
