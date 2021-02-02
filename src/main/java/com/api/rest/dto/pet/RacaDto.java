@@ -1,12 +1,17 @@
 package com.api.rest.dto.pet;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 public class RacaDto {
     private Long id;
-    @NotNull @NotEmpty
-    private Long especie;
+    @NotNull
+    @NotEmpty
+    @JsonProperty("id_especie")
+    private Long idEspecie;
+    private String especie;
     @NotNull @NotEmpty
     private String nome;
 
@@ -18,11 +23,19 @@ public class RacaDto {
         this.id = id;
     }
 
-    public Long getEspecie() {
+    public Long getIdEspecie() {
+        return idEspecie;
+    }
+
+    public void setIdEspecie(Long idEspecie) {
+        this.idEspecie = idEspecie;
+    }
+
+    public String getEspecie() {
         return especie;
     }
 
-    public void setEspecie(Long especie) {
+    public void setEspecie(String especie) {
         this.especie = especie;
     }
 

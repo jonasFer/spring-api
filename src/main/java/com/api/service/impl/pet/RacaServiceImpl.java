@@ -6,6 +6,7 @@ import com.api.service.EspecieService;
 import com.api.service.RacaService;
 import com.api.service.impl.BaseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -32,8 +33,8 @@ public class RacaServiceImpl extends BaseServiceImpl implements RacaService {
     }
 
     @Override
-    public List<Raca> all() {
-        return racaRepository.findRacaByEmpresa(this.getEmpresaLogada());
+    public List<Raca> all(Pageable pageable) {
+        return racaRepository.findRacaByEmpresa(this.getEmpresaLogada(), pageable);
     }
 
     @Override

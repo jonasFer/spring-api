@@ -14,7 +14,8 @@ public class RacaBuilder {
     public RacaDto buildDtoFromEntity(Raca raca) {
         RacaDto dto = new RacaDto();
         dto.setId(raca.getId());
-        dto.setEspecie(raca.getEspecie().getId());
+        dto.setIdEspecie(raca.getEspecie().getId());
+        dto.setEspecie(raca.getEspecie().getNome());
         dto.setNome(raca.getNome());
 
         return dto;
@@ -23,7 +24,7 @@ public class RacaBuilder {
     public Raca builEntityFromDto(RacaDto dto) {
         Raca raca = new Raca();
         raca.setNome(dto.getNome());
-        raca.setEspecie(especieService.findById(dto.getEspecie()));
+        raca.setEspecie(especieService.findById(dto.getIdEspecie()));
 
         return raca;
     }

@@ -6,6 +6,9 @@ import com.api.rest.dto.pet.RacaDto;
 import com.api.service.RacaService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -41,9 +44,11 @@ public class RacaController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public PageDto all() {
+    public PageDto all(
+            @PageableDefault(sort = "dataCriacao", direction = Sort.Direction.ASC, page = 0, size = 10) Pageable pageable
+    ) {
         List<RacaDto> list = racaService
-                .all()
+                .all(pageable)
                 .stream()
                 .map(raca -> builder.buildDtoFromEntity(raca))
                 .collect(Collectors.toList());

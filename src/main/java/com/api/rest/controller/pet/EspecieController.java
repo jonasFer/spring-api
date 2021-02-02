@@ -29,7 +29,7 @@ public class EspecieController {
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public PageDto all(
-        @PageableDefault(sort = "dataCriacao", direction = Sort.Direction.DESC, page = 0, size = 10)Pageable pageable
+        @PageableDefault(sort = "dataCriacao", direction = Sort.Direction.ASC, page = 0, size = 10)Pageable pageable
     )
     {
         List<EspecieDto> list = service
