@@ -1,10 +1,11 @@
 package com.api.rest.controller.pet;
 
-import com.api.application.builder.model.pet.AnimalBuilder;
+import com.api.builder.pet.AnimalBuilder;
 import com.api.rest.dto.PageDto;
 import com.api.rest.dto.pet.AnimalDto;
 import com.api.service.AnimalService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +24,10 @@ public class AnimalController {
     @Autowired
     private AnimalBuilder builder;
 
+    @ApiOperation(
+            value = "Listar animal pelo id",
+            httpMethod = "GET"
+    )
     @GetMapping("{id}")
     @ResponseStatus(HttpStatus.OK)
     public AnimalDto find(@PathVariable Long id) throws ParseException {

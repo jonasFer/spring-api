@@ -1,4 +1,4 @@
-package com.api.application.builder.model.pet;
+package com.api.builder.pet;
 
 import com.api.domain.model.pet.Especie;
 import com.api.rest.dto.pet.EspecieDto;
@@ -7,17 +7,18 @@ import org.springframework.stereotype.Service;
 @Service
 public class EspecieBuilder {
     public Especie builEntityFromDto(EspecieDto dto) {
-        Especie especie = new Especie();
-        especie.setNome(dto.getNome());
+        return Especie
+                .builder()
+                .nome(dto.getNome())
+                .build();
 
-        return especie;
     }
 
     public EspecieDto buildDtoFromEntity(Especie especie) {
-        EspecieDto dto = new EspecieDto();
-        dto.setId(especie.getId());
-        dto.setNome(especie.getNome());
-
-        return dto;
+        return EspecieDto
+                .builder()
+                .id(especie.getId())
+                .nome(especie.getNome())
+                .build();
     }
 }

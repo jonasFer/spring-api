@@ -18,5 +18,8 @@ public interface AnimalRepository extends JpaRepository<Animal, Long> {
     @Query("select a from Animal a join fetch a.pessoa p where p.empresa = :empresa")
     List<Animal> findByEmpresa(@Param("empresa") Empresa empresa);
 
+    @Query("select a from Animal a join fetch a.pessoa p where p.empresa = :empresa and p.id = :idPessoa")
+    List<Animal> findByEmpresaAndPessoa(@Param("empresa") Empresa empresa, @Param("idPessoa") Long idPessoa);
+
     long countByPessoaEmpresa(@Param("empresa") Empresa empresa);
 }

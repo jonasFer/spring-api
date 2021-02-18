@@ -21,8 +21,11 @@ public class Usuario implements UserDetails {
     private String password;
     @Column(name = "data_criacao")
     private LocalDateTime dataCriacao = LocalDateTime.now();
-
     @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "usuario_perfil",
+            joinColumns = @JoinColumn(name = "id_usuario"),
+            inverseJoinColumns = @JoinColumn(name = "id_perfil"))
     private List<PerfilUsuario> perfis;
 
     public Long getId() {

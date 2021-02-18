@@ -1,6 +1,6 @@
 package com.api.rest.controller.pet;
 
-import com.api.application.builder.model.pet.EspecieBuilder;
+import com.api.builder.pet.EspecieBuilder;
 import com.api.rest.dto.PageDto;
 import com.api.rest.dto.pet.EspecieDto;
 import com.api.service.EspecieService;
@@ -36,11 +36,7 @@ public class EspecieController {
                 .all(pageable)
                 .stream()
                 .map(especie -> {
-                    EspecieDto dto = new EspecieDto();
-                    dto.setId(especie.getId());
-                    dto.setNome(especie.getNome());
-
-                    return dto;
+                    return builder.buildDtoFromEntity(especie);
                 })
                 .collect(Collectors.toList());
 

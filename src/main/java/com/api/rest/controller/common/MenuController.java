@@ -1,6 +1,6 @@
 package com.api.rest.controller.common;
 
-import com.api.application.builder.model.MenuBuilder;
+import com.api.builder.MenuBuilder;
 import com.api.rest.dto.common.MenuDto;
 import com.api.service.MenuService;
 import io.swagger.annotations.Api;

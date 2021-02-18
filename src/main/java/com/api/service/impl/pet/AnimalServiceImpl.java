@@ -1,5 +1,6 @@
 package com.api.service.impl.pet;
 
+import com.api.domain.model.common.Pessoa;
 import com.api.domain.model.pet.Animal;
 import com.api.domain.repository.pet.AnimalRepository;
 import com.api.service.AnimalService;
@@ -27,6 +28,12 @@ public class AnimalServiceImpl extends BaseServiceImpl implements AnimalService 
     @Override
     public List<Animal> all() {
         return animalRepository.findByEmpresa(this.getEmpresaLogada());
+
+    }
+
+    @Override
+    public List<Animal> allByPessoa(Long idPessoa) {
+        return animalRepository.findByEmpresaAndPessoa(this.getEmpresaLogada(), idPessoa);
 
     }
 

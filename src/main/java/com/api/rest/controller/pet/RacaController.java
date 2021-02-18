@@ -1,6 +1,6 @@
 package com.api.rest.controller.pet;
 
-import com.api.application.builder.model.pet.RacaBuilder;
+import com.api.builder.pet.RacaBuilder;
 import com.api.rest.dto.PageDto;
 import com.api.rest.dto.pet.RacaDto;
 import com.api.service.RacaService;

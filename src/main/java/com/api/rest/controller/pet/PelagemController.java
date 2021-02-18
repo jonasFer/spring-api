@@ -1,6 +1,6 @@
 package com.api.rest.controller.pet;
 
-import com.api.application.builder.model.pet.PelagemBuilder;
+import com.api.builder.pet.PelagemBuilder;
 import com.api.rest.dto.PageDto;
 import com.api.rest.dto.pet.PelagemDto;
 import com.api.service.PelagemService;
@@ -29,12 +29,8 @@ public class PelagemController {
         List<PelagemDto> list = service
                 .all()
                 .stream()
-                .map(especie -> {
-                    PelagemDto dto = new PelagemDto();
-                    dto.setId(especie.getId());
-                    dto.setNome(especie.getNome());
-
-                    return dto;
+                .map(pelagem -> {
+                    return builder.buildDtoFromEntity(pelagem);
                 })
                 .collect(Collectors.toList());
         return new PageDto( service.countRegisters(), list);
