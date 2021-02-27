@@ -5,6 +5,7 @@ import com.api.domain.repository.pet.PelagemRepository;
 import com.api.service.PelagemService;
 import com.api.service.impl.BaseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -24,8 +25,8 @@ public class PelagemServiceImpl extends BaseServiceImpl implements PelagemServic
     }
 
     @Override
-    public List<Pelagem> all() {
-        return repository.findByEmpresa(this.getEmpresaLogada());
+    public List<Pelagem> all(Pageable pageable) {
+        return repository.findByEmpresa(this.getEmpresaLogada(), pageable);
     }
 
     @Override

@@ -25,7 +25,11 @@ public class EspecieServiceImpl extends BaseServiceImpl implements EspecieServic
     }
 
     @Override
-    public List<Especie> all(Pageable pageable) {
+    public List<Especie> all(String nome, Pageable pageable) {
+        if (!nome.isEmpty()) {
+            return repository.findByNomeAndEmpresa(nome, this.getEmpresaLogada(), pageable);
+        }
+
         return repository.findByEmpresa(this.getEmpresaLogada(), pageable);
     }
 
@@ -56,7 +60,10 @@ public class EspecieServiceImpl extends BaseServiceImpl implements EspecieServic
     }
 
     @Override
-    public long allRegisters() {
+    public long allRegisters(String nome) {
+        if (!nome.isEmpty()) {
+            return repository.countFromNomeAndEmpresa(nome, this.getEmpresaLogada());
+        }
         return repository.countFromEmpresa(this.getEmpresaLogada());
     }
 }

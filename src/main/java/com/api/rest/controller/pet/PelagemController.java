@@ -5,7 +5,11 @@ import com.api.rest.dto.PageDto;
 import com.api.rest.dto.pet.PelagemDto;
 import com.api.service.PelagemService;
 import io.swagger.annotations.Api;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,10 +28,11 @@ public class PelagemController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public PageDto all()
-    {
+    public PageDto all(
+            @PageableDefault(page = 0, size = 10) Pageable pageable
+    ) {
         List<PelagemDto> list = service
-                .all()
+                .all(pageable)
                 .stream()
                 .map(pelagem -> {
                     return builder.buildDtoFromEntity(pelagem);

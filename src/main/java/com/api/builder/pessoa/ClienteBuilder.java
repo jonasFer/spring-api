@@ -25,9 +25,6 @@ public class ClienteBuilder {
     private ContatoBuilder contatoBuilder;
 
     @Autowired
-    private AnimalService animalService;
-
-    @Autowired
     private AnimalBuilder animalBuilder;
 
     public Cliente builEntityFromDto(ClienteDto dto) {
@@ -52,7 +49,7 @@ public class ClienteBuilder {
                 .builder()
                 .id(cliente.getId())
                 .nome(cliente.getPessoa().getNome())
-                .animais(animalService.allByPessoa(cliente.getPessoa().getId()).stream().map(a -> this.animalBuilder.buildLiteDtoFromEntity(a)).collect(Collectors.toList()))
+                .animais(cliente.getAnimais().stream().map(a -> this.animalBuilder.buildLiteDtoFromEntity(a)).collect(Collectors.toList()))
                 .build();
     }
 }

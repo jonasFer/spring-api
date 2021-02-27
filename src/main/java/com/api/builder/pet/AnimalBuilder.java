@@ -2,10 +2,7 @@ package com.api.builder.pet;
 
 import com.api.domain.model.pet.Animal;
 import com.api.rest.dto.pet.AnimalDto;
-import com.api.service.EspecieService;
-import com.api.service.PelagemService;
-import com.api.service.PessoaService;
-import com.api.service.RacaService;
+import com.api.service.*;
 import com.api.util.DataConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +12,7 @@ import java.text.ParseException;
 @Service
 public class AnimalBuilder {
     @Autowired
-    private PessoaService pessoaService;
+    private ClienteService clienteService;
     @Autowired
     private EspecieService especieService;
     @Autowired
@@ -27,7 +24,7 @@ public class AnimalBuilder {
         return AnimalDto
                 .builder()
                 .id(animal.getId())
-                .pessoa(animal.getPessoa().getId())
+                .cliente(animal.getCliente().getId())
                 .nome(animal.getNome())
                 .sexo(animal.getSexo())
                 .dataNascimento(DataConverter.convertDateToString(animal.getDataNascimento()))
@@ -42,7 +39,7 @@ public class AnimalBuilder {
         return Animal
                 .builder()
                 .nome(dto.getNome())
-                .pessoa(pessoaService.findById(dto.getPessoa()))
+                .cliente(clienteService.findById(dto.getCliente()))
                 .sexo(dto.getSexo())
                 .dataNascimento(DataConverter.convertStringToDate(dto.getDataNascimento()))
                 .especie(especieService.findById(dto.getEspecie()))

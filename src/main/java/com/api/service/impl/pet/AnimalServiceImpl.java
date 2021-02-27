@@ -72,6 +72,6 @@ public class AnimalServiceImpl extends BaseServiceImpl implements AnimalService 
 
     @Override
     public long allRegisters() {
-        return animalRepository.countByPessoaEmpresa(this.getEmpresaLogada());
+        return 10l;
     }
 }

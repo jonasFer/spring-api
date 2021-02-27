@@ -15,7 +15,7 @@ import javax.validation.constraints.NotNull;
 public class AnimalDto {
     private Long id;
     @NotNull
-    private Long pessoa;
+    private Long cliente;
     @NotNull
     private String nome;
     private String sexo;

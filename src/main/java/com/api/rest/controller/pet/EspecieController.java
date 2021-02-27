@@ -5,6 +5,7 @@ import com.api.rest.dto.PageDto;
 import com.api.rest.dto.pet.EspecieDto;
 import com.api.service.EspecieService;
 import io.swagger.annotations.Api;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -16,6 +17,7 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Api(tags = "Pet")
 @RestController
 @RequestMapping("pet/especie")
@@ -29,18 +31,19 @@ public class EspecieController {
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public PageDto all(
-        @PageableDefault(sort = "dataCriacao", direction = Sort.Direction.ASC, page = 0, size = 10)Pageable pageable
+        @RequestParam(required = false, defaultValue = "") String nome,
+        @PageableDefault(page = 0, size = 10)Pageable pageable
     )
     {
         List<EspecieDto> list = service
-                .all(pageable)
+                .all(nome, pageable)
                 .stream()
                 .map(especie -> {
                     return builder.buildDtoFromEntity(especie);
                 })
                 .collect(Collectors.toList());
 
-        return new PageDto( service.allRegisters(), list);
+        return new PageDto( service.allRegisters(nome), list);
     }
 
     @GetMapping("{id}")

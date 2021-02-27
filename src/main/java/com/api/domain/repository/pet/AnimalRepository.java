@@ -12,14 +12,12 @@ import java.util.Optional;
 
 @Repository
 public interface AnimalRepository extends JpaRepository<Animal, Long> {
-    @Query("select a from Animal a join fetch a.pessoa p where a.id = :id and p.empresa = :empresa")
+    @Query("select a from Animal a join fetch a.cliente c join fetch c.pessoa p where a.id = :id and p.empresa = :empresa")
     Optional<Animal> findByIdAndEmpresa(@Param("id") Long id, @Param("empresa") Empresa empresa);
 
-    @Query("select a from Animal a join fetch a.pessoa p where p.empresa = :empresa")
+    @Query("select a from Animal a join fetch a.cliente c join fetch c.pessoa p where p.empresa = :empresa")
     List<Animal> findByEmpresa(@Param("empresa") Empresa empresa);
 
-    @Query("select a from Animal a join fetch a.pessoa p where p.empresa = :empresa and p.id = :idPessoa")
-    List<Animal> findByEmpresaAndPessoa(@Param("empresa") Empresa empresa, @Param("idPessoa") Long idPessoa);
-
-    long countByPessoaEmpresa(@Param("empresa") Empresa empresa);
+    @Query("select a from Animal a join fetch a.cliente c join fetch c.pessoa p where p.empresa = :empresa and c.id = :idCliente")
+    List<Animal> findByEmpresaAndPessoa(@Param("empresa") Empresa empresa, @Param("idCliente") Long idCliente);
 }
