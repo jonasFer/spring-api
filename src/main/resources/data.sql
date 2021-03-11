@@ -62,3 +62,4 @@ INSERT INTO ANIMAL (id, id_cliente, nome, sexo, data_nascimento, id_especie, id_
 INSERT INTO PESSOA_CONTATO (id_pessoa, id_contato) VALUES (2, 1);
 INSERT INTO PESSOA_ENDERECO (id_pessoa, id_endereco) VALUES (2, 1);
 
+INSERT INTO MARCA (id, id_empresa, nome) VALUES (1, 1, 'Marca 1');
