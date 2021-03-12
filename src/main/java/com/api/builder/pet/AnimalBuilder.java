@@ -35,7 +35,6 @@ public class AnimalBuilder {
     }
 
     public Animal buidEntityFromDto(AnimalDto dto) throws ParseException {
-
         return Animal
                 .builder()
                 .nome(dto.getNome())

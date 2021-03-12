@@ -63,3 +63,10 @@ INSERT INTO PESSOA_CONTATO (id_pessoa, id_contato) VALUES (2, 1);
 INSERT INTO PESSOA_ENDERECO (id_pessoa, id_endereco) VALUES (2, 1);
 
 INSERT INTO MARCA (id, id_empresa, nome) VALUES (1, 1, 'Marca 1');
+
+INSERT INTO GRUPO_PRODUTO (id, id_empresa, nome, status, id_grupo_pai) VALUES (1, 1, 'Grupo 1', true, null);
+INSERT INTO GRUPO_PRODUTO (id, id_empresa, nome, status, id_grupo_pai ) VALUES (2, 1, 'Grupo 2', true, 1);
+INSERT INTO GRUPO_PRODUTO (id, id_empresa, nome, status, id_grupo_pai ) VALUES (3, 1, 'Grupo 3', true, 2);
+INSERT INTO GRUPO_PRODUTO (id, id_empresa, nome, status, id_grupo_pai ) VALUES (4, 1, 'Grupo 4', false, 1);
+INSERT INTO GRUPO_PRODUTO (id, id_empresa, nome, status, id_grupo_pai ) VALUES (5, 1, 'Grupo 5', true, 1);
+INSERT INTO GRUPO_PRODUTO (id, id_empresa, nome, status, id_grupo_pai ) VALUES (6, 1, 'Grupo 6', false, null);

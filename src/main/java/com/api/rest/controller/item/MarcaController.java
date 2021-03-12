@@ -23,8 +23,8 @@ public class MarcaController {
 
     @GetMapping
     public ResponseEntity<PageDto> all(
-            @RequestParam(required = false, defaultValue = "") String nome,
-            @PageableDefault(page = 0, size = 10) Pageable pageable
+            @RequestParam(required = false) String nome,
+            Pageable pageable
     ) {
         Page<Marca> page = service.findAll(nome, pageable);
         PageDto response = new PageDto(page.getTotalElements(), page.toList());

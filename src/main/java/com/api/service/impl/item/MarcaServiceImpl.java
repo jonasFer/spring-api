@@ -2,18 +2,23 @@ package com.api.service.impl.item;
 
 import com.api.domain.model.item.Marca;
 import com.api.domain.repository.item.MarcaRepository;
+import com.api.exception.DomainException;
 import com.api.exception.NotFoundException;
 import com.api.service.MarcaService;
 import com.api.service.impl.BaseServiceImpl;
+import com.api.util.constants.ErrorContants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
+
+import static java.lang.String.format;
 
 @Service
 public class MarcaServiceImpl extends BaseServiceImpl implements MarcaService {
+
+    private final String NAME_OBJECT = "Marca";
+
     @Autowired
     private MarcaRepository repository;
 
@@ -29,7 +34,9 @@ public class MarcaServiceImpl extends BaseServiceImpl implements MarcaService {
     @Override
     public Marca findbyId(Long id) {
         return repository.findByIdAndEmpresa(id, getEmpresaLogada())
-                .orElseThrow(() -> new NotFoundException("Marca não encontrada."));
+                .orElseThrow(() ->
+                        new NotFoundException(format(ErrorContants.ERROR_REGISTER_NOT_FOUND, this.NAME_OBJECT))
+                );
     }
 
     @Override
@@ -59,7 +66,7 @@ public class MarcaServiceImpl extends BaseServiceImpl implements MarcaService {
     private void hasMarcaMesmoNome(String nome)
     {
         if(repository.findByNomeAndEmpresa(nome, getEmpresaLogada()).isPresent()) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Marca com mesmo nome já cadastrada.");
+            throw new DomainException(format(ErrorContants.ERROR_NAME_EXISTS, this.NAME_OBJECT));
         }
     }
 }

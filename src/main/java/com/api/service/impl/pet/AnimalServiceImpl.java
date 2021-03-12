@@ -1,19 +1,21 @@
 package com.api.service.impl.pet;
 
-import com.api.domain.model.common.Pessoa;
 import com.api.domain.model.pet.Animal;
 import com.api.domain.repository.pet.AnimalRepository;
+import com.api.exception.NotFoundException;
 import com.api.service.AnimalService;
 import com.api.service.impl.BaseServiceImpl;
+import com.api.util.constants.ErrorContants;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
+import static java.lang.String.format;
 
 import java.util.List;
 
 @Service
 public class AnimalServiceImpl extends BaseServiceImpl implements AnimalService {
+
+    private final String NAME_OBJECT = "Animal";
 
     @Autowired
     private AnimalRepository animalRepository;
@@ -22,7 +24,7 @@ public class AnimalServiceImpl extends BaseServiceImpl implements AnimalService 
     public Animal byId(Long id) {
         return animalRepository
                 .findByIdAndEmpresa(id, this.getEmpresaLogada())
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Animal não encontrado"));
+                .orElseThrow(() -> new NotFoundException(format(ErrorContants.ERROR_REGISTER_NOT_FOUND, this.NAME_OBJECT)));
     }
 
     @Override
@@ -56,7 +58,7 @@ public class AnimalServiceImpl extends BaseServiceImpl implements AnimalService 
 
                     return animalRepository.save(animalBanco);
                 })
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Animal não encontrado"));
+                .orElseThrow(() -> new NotFoundException(format(ErrorContants.ERROR_REGISTER_NOT_FOUND, this.NAME_OBJECT)));
     }
 
     @Override
@@ -67,7 +69,7 @@ public class AnimalServiceImpl extends BaseServiceImpl implements AnimalService 
                     animalRepository.delete(animal);
                     return Void.TYPE;
                 })
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Animal não encontrado"));
+                .orElseThrow(() -> new NotFoundException(format(ErrorContants.ERROR_REGISTER_NOT_FOUND, this.NAME_OBJECT)));
     }
 
     @Override
