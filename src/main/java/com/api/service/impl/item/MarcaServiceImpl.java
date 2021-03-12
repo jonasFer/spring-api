@@ -2,6 +2,7 @@ package com.api.service.impl.item;
 
 import com.api.domain.model.item.Marca;
 import com.api.domain.repository.item.MarcaRepository;
+import com.api.exception.NotFoundException;
 import com.api.service.MarcaService;
 import com.api.service.impl.BaseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ public class MarcaServiceImpl extends BaseServiceImpl implements MarcaService {
     @Override
     public Marca findbyId(Long id) {
         return repository.findByIdAndEmpresa(id, getEmpresaLogada())
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Marca não encontrada."));
+                .orElseThrow(() -> new NotFoundException("Marca não encontrada."));
     }
 
     @Override
