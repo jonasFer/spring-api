@@ -1,5 +1,6 @@
 package com.api.rest.dto.item;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -24,4 +25,6 @@ public class GrupoProdutoDto {
     private Boolean status;
 
     private List<GrupoProdutoDto> subGrupos;
+
+    private Long idGrupoPai;
 }

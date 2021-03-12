@@ -20,12 +20,22 @@ public class GrupoProdutoBuilder {
                 .id(grupoProduto.getId())
                 .nome(grupoProduto.getNome())
                 .status(grupoProduto.getStatus())
+                .idGrupoPai(grupoProduto.getGrupoPai() != null ? grupoProduto.getGrupoPai().getId() : null)
                 .subGrupos(
                         grupoProdutoService.findSubGrupos(grupoProduto)
                                 .stream()
                                 .map(grupo -> { return buildDtoFromEntity(grupo); })
                                 .collect(Collectors.toList())
                 )
+                .build();
+    }
+
+    public GrupoProduto buildEntityFromDto(GrupoProdutoDto dto) {
+        return GrupoProduto
+                .builder()
+                .nome(dto.getNome())
+                .status(dto.getStatus())
+                .grupoPai(grupoProdutoService.findbyId(dto.getIdGrupoPai()))
                 .build();
     }
 }

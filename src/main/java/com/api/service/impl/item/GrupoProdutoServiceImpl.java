@@ -37,7 +37,9 @@ public class GrupoProdutoServiceImpl extends BaseServiceImpl implements GrupoPro
     public GrupoProduto findbyId(Long id) {
         return repository
                 .findByIdAndEmpresa(id, getEmpresaLogada())
-                .orElseThrow(() -> new NotFoundException(this.NAME_OBJECT));
+                .orElseThrow(() ->
+                        new NotFoundException(format(ErrorContants.ERROR_REGISTER_NOT_FOUND, this.NAME_OBJECT))
+                );
     }
 
     @Override
@@ -49,6 +51,7 @@ public class GrupoProdutoServiceImpl extends BaseServiceImpl implements GrupoPro
                     grupo.setGrupoPai(grupoProduto.getGrupoPai());
                     grupo.setStatus(grupoProduto.getStatus());
 
+                    save(grupo);
                     return grupo;
                 })
                 .orElseThrow(() ->
@@ -59,6 +62,7 @@ public class GrupoProdutoServiceImpl extends BaseServiceImpl implements GrupoPro
     @Override
     public GrupoProduto save(GrupoProduto grupoProduto) {
         hasGrupoMesmoNome(grupoProduto.getNome());
+        grupoProduto.setEmpresa(getEmpresaLogada());
         return repository.save(grupoProduto);
     }
 
