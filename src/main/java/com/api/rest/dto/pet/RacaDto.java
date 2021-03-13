@@ -15,11 +15,13 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 public class RacaDto {
     private Long id;
+
     @NotNull
-    @NotEmpty
     @JsonProperty("id_especie")
     private Long idEspecie;
+
     private String especie;
-    @NotNull @NotEmpty
+
+    @NotEmpty
     private String nome;
 }

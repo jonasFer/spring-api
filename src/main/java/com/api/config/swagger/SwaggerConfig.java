@@ -40,15 +40,13 @@ public class SwaggerConfig implements WebMvcConfigurer {
                 .apis(RequestHandlerSelectors.basePackage("com.api.rest.controller"))
                 .paths(PathSelectors.any())
                 .build()
-                //.securityContexts(Arrays.asList(securityContext()))
-                //.securitySchemes(Arrays.asList(apiKey()))
                 .apiInfo(apiInfo());
     }
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("Api Skeleton")
-                .description("Api Skeleton")
+                .title("Api PetShop")
+                .description("Api para sistema de pet shop e clínica veterinária")
                 .version("1.0")
                 .contact(contact())
                 .build();

@@ -12,7 +12,7 @@
 	<artifactId>api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>api</name>
-	<description>Api skeleton</description>
+	<description>Api PetShop</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>
@@ -34,8 +34,9 @@
 		</dependency>
 
 		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>8.0.19</version>
 		</dependency>
 
 		<dependency>
@@ -73,11 +74,6 @@
 			<version>2.9.2</version>
 		</dependency>
 
-<!--		<dependency>-->
-<!--			<groupId>javax.validation</groupId>-->
-<!--			<artifactId>validation-api</artifactId>-->
-<!--			<version>2.0.0.Final</version>-->
-<!--		</dependency>-->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>

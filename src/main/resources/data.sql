@@ -1,72 +1,234 @@
+CREATE DATABASE thepetz CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+CREATE TABLE IF NOT EXISTS empresa
+(
+    id           bigint NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    data_criacao timestamp default current_timestamp
+);
+
+CREATE TABLE IF NOT EXISTS pessoa
+(
+    id              bigint NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    cpf_cnpj        varchar(255),
+    data_criacao    timestamp default current_timestamp,
+    data_nascimento timestamp,
+    nome            varchar(255),
+    rg_ie           varchar(255),
+    id_empresa      bigint,
+    FOREIGN KEY (id_empresa) REFERENCES empresa (id)
+);
+
+CREATE TABLE IF NOT EXISTS cliente
+(
+    id           bigint NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    data_criacao timestamp default current_timestamp,
+    id_pessoa    bigint,
+    FOREIGN KEY (id_pessoa) REFERENCES pessoa (id)
+);
+
+CREATE TABLE IF NOT EXISTS especie
+(
+    id           bigint NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    data_criacao timestamp default current_timestamp,
+    nome         varchar(255),
+    id_empresa   bigint not null,
+    FOREIGN KEY (id_empresa) REFERENCES empresa (id)
+);
+
+CREATE TABLE IF NOT EXISTS raca
+(
+    id           bigint NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    data_criacao timestamp default current_timestamp,
+    nome         varchar(255),
+    id_especie   bigint,
+    FOREIGN KEY (id_especie) REFERENCES especie (id)
+);
+
+CREATE TABLE IF NOT EXISTS tipo_contato
+(
+    id           bigint NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    data_criacao timestamp default current_timestamp,
+    nome         varchar(255)
+);
+
+CREATE TABLE IF NOT EXISTS contato
+(
+    id              bigint NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    observacao      varchar(255),
+    valor           varchar(255),
+    id_tipo_contato bigint,
+    FOREIGN KEY (id_tipo_contato) REFERENCES tipo_contato (id)
+);
+
+CREATE TABLE IF NOT EXISTS pelagem
+(
+    id           bigint NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    nome         varchar(255),
+    id_empresa   bigint not null,
+    data_criacao timestamp default current_timestamp,
+    FOREIGN KEY (id_empresa) REFERENCES empresa (id)
+);
+
+CREATE TABLE IF NOT EXISTS animal
+(
+    id              bigint NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    data_nascimento timestamp,
+    nome            varchar(255),
+    sexo            varchar(255),
+    id_cliente      bigint not null,
+    id_especie      bigint not null,
+    id_pelagem      bigint not null,
+    id_raca         bigint not null,
+    FOREIGN KEY (id_cliente) REFERENCES cliente (id),
+    FOREIGN KEY (id_especie) REFERENCES especie (id),
+    FOREIGN KEY (id_pelagem) REFERENCES pelagem (id),
+    FOREIGN KEY (id_raca) REFERENCES raca (id)
+);
+
+CREATE TABLE IF NOT EXISTS estado
+(
+    id    bigint NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    nome  varchar(255),
+    sigla varchar(255)
+);
+
+
+CREATE TABLE IF NOT EXISTS endereco
+(
+    id          bigint NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    bairro      varchar(255),
+    cep         varchar(255),
+    complemento varchar(255),
+    logradouro  varchar(255),
+    municipio   varchar(255),
+    numero      varchar(255),
+    id_estado   bigint,
+    FOREIGN KEY (id_estado) REFERENCES estado (id)
+);
+
+
+CREATE TABLE IF NOT EXISTS funcionalidade
+(
+    id           bigint NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    data_criacao timestamp default current_timestamp,
+    nome         varchar(255)
+);
+
+CREATE TABLE IF NOT EXISTS menu
+(
+    id           bigint NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    data_criacao timestamp default current_timestamp,
+    nome         varchar(255),
+    id_menu_pai  bigint,
+    FOREIGN KEY (id_menu_pai) REFERENCES menu (id)
+);
+
+CREATE TABLE IF NOT EXISTS perfil
+(
+    id           bigint NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    nome         varchar(255),
+    data_criacao timestamp default current_timestamp,
+    id_empresa   bigint
+);
+
+CREATE TABLE IF NOT EXISTS perfil_funcionalidade
+(
+    id                bigint NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    id_funcionalidade bigint,
+    id_perfil         bigint,
+    data_criacao      timestamp default current_timestamp,
+    FOREIGN KEY (id_perfil) REFERENCES perfil (id),
+    FOREIGN KEY (id_funcionalidade) REFERENCES funcionalidade (id)
+);
+
+CREATE TABLE IF NOT EXISTS perfil_usuario
+(
+    id           bigint NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    nome         varchar(255),
+    descricao    varchar(255),
+    data_criacao timestamp default current_timestamp
+);
+
+
+CREATE TABLE IF NOT EXISTS pessoa_contato
+(
+    id_pessoa  bigint not null,
+    id_contato bigint not null,
+    PRIMARY KEY (id_pessoa, id_contato),
+    FOREIGN KEY (id_pessoa) REFERENCES pessoa (id),
+    FOREIGN KEY (id_contato) REFERENCES contato (id)
+);
+
+CREATE TABLE IF NOT EXISTS pessoa_endereco
+(
+    id_pessoa   bigint not null,
+    id_endereco bigint not null,
+    PRIMARY KEY (id_pessoa, id_endereco),
+    FOREIGN KEY (id_pessoa) REFERENCES pessoa (id),
+    FOREIGN KEY (id_endereco) REFERENCES endereco (id)
+);
+
+CREATE TABLE IF NOT EXISTS grupo_produto
+(
+    id           bigint NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    nome         varchar(255),
+    status       boolean,
+    id_empresa   bigint not null,
+    id_grupo_pai bigint,
+    FOREIGN KEY (id_empresa) REFERENCES empresa (id),
+    FOREIGN KEY (id_grupo_pai) REFERENCES grupo_produto (id)
+);
+
+CREATE TABLE IF NOT EXISTS marca
+(
+    id           bigint       NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    nome         varchar(255) not null,
+    id_empresa   bigint       not null,
+    data_criacao timestamp default current_timestamp,
+    FOREIGN KEY (id_empresa) REFERENCES empresa (id)
+);
+
+CREATE TABLE IF NOT EXISTS produto
+(
+    id               bigint       NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    gtin             bigint,
+    nome             varchar(255) not null,
+    status           boolean      not null,
+    tipo_produto     integer      not null,
+    unidade_venda    varchar(255),
+    valor_custo      decimal(19, 2),
+    valor_venda      decimal(19, 2),
+    id_empresa       bigint       not null,
+    id_grupo_produto bigint,
+    id_marca         bigint,
+    FOREIGN KEY (id_empresa) REFERENCES empresa (id),
+    FOREIGN KEY (id_grupo_produto) REFERENCES grupo_produto (id),
+    FOREIGN KEY (id_marca) REFERENCES marca (id)
+);
+
+CREATE TABLE IF NOT EXISTS usuario
+(
+    id           bigint NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    email        varchar(255) UNIQUE,
+    password     varchar(255),
+    id_pessoa    bigint,
+    data_criacao timestamp default current_timestamp,
+    FOREIGN KEY (id_pessoa) REFERENCES pessoa (id)
+);
+
+CREATE TABLE IF NOT EXISTS usuario_perfil
+(
+    id_usuario bigint not null,
+    id_perfil  bigint not null,
+    FOREIGN KEY (id_usuario) REFERENCES usuario (id),
+    FOREIGN KEY (id_perfil) REFERENCES perfil (id)
+);
+
+
+-- inserts básicos
 INSERT INTO EMPRESA(id) VALUES (1);
-INSERT INTO EMPRESA(id) VALUES (2);
-
-INSERT INTO PESSOA(id, id_empresa, nome, data_nascimento, cpf_cnpj, rg_ie) VALUES (1, 1, 'Jonas', '1995-02-07', '09804970980', '3721235');
-INSERT INTO PESSOA(id, id_empresa, nome, data_nascimento, cpf_cnpj, rg_ie) VALUES (2, 1, 'Marciele',  '1993-08-03', '09104970980', '3798735');
-
-INSERT INTO USUARIO(id_pessoa, email, password) VALUES(1, 'jonas@email.com', '$2a$10$sFKmbxbG4ryhwPNx/l3pgOJSt.fW1z6YcUnuE2X8APA/Z3NI/oSpq');
+INSERT INTO PESSOA(id, id_empresa, nome, data_nascimento, cpf_cnpj, rg_ie) VALUES (1, 1, 'Pessoa 1', '1995-02-07', '09804970980', '3721235');
+INSERT INTO USUARIO(id_pessoa, email, password) VALUES(1, 'enail@email.com', '$2a$10$sFKmbxbG4ryhwPNx/l3pgOJSt.fW1z6YcUnuE2X8APA/Z3NI/oSpq'); -- senha 123456
 INSERT INTO PERFIL_USUARIO(id, nome) VALUES(1, 'ROLE_ADMIN');
-INSERT INTO USUARIO_PERFIL(id_usuario, id_perfil) VALUES (1, 1);
-
-INSERT INTO ESPECIE (id, id_empresa, nome) VALUES (1, 1, 'Espécie 1');
-INSERT INTO ESPECIE (id, id_empresa, nome) VALUES (2, 1, 'Espécie 2');
-INSERT INTO ESPECIE (id, id_empresa, nome) VALUES (3, 1, 'Espécie 3');
-INSERT INTO ESPECIE (id, id_empresa, nome) VALUES (4, 1, 'Espécie 4');
-INSERT INTO ESPECIE (id, id_empresa, nome) VALUES (5, 1, 'Espécie 5');
-INSERT INTO ESPECIE (id, id_empresa, nome) VALUES (6, 1, 'Espécie 6');
-INSERT INTO ESPECIE (id, id_empresa, nome) VALUES (7, 1, 'Espécie 7');
-INSERT INTO ESPECIE (id, id_empresa, nome) VALUES (8, 1, 'Espécie 8');
-INSERT INTO ESPECIE (id, id_empresa, nome) VALUES (9, 1, 'Espécie 9');
-INSERT INTO ESPECIE (id, id_empresa, nome) VALUES (10, 1, 'Espécie 10');
-INSERT INTO ESPECIE (id, id_empresa, nome) VALUES (11, 1, 'Espécie 11');
-INSERT INTO ESPECIE (id, id_empresa, nome) VALUES (12, 1, 'Espécie 12');
-INSERT INTO ESPECIE (id, id_empresa, nome) VALUES (13, 1, 'Espécie 13');
-INSERT INTO ESPECIE (id, id_empresa, nome) VALUES (14, 1, 'Espécie 14');
-
-INSERT INTO RACA (id, id_especie, nome) VALUES (1, 1, 'Raça 1');
-INSERT INTO PELAGEM (id, id_empresa, nome) VALUES (1, 1, 'Pelagem 1');
-
-INSERT INTO MENU (id, nome) VALUES (1, 'Dashboard');
-INSERT INTO MENU (id, nome) VALUES (2, 'Caixa');
-INSERT INTO MENU (id, nome) VALUES (3, 'Clinica');
-INSERT INTO MENU (id, nome) VALUES (4, 'Cadastro');
-INSERT INTO MENU (id, id_menu_pai, nome) VALUES (30, 4, 'Espécie');
-INSERT INTO MENU (id, id_menu_pai, nome) VALUES (31, 4, 'Raça');
-
-
-INSERT INTO PERFIL (id, nome, id_empresa) VALUES (1, 'Admin', 1);
-INSERT INTO PERFIL (id, nome, id_empresa) VALUES (2, 'Caixa', 1);
-INSERT INTO PERFIL (id, nome, id_empresa) VALUES (3, 'Veterinário', 1);
-
-INSERT INTO FUNCIONALIDADE (id, nome) VALUES (1, 'Financeiro');
-INSERT INTO FUNCIONALIDADE (id, nome) VALUES (2, 'Abrir Caixa');
-INSERT INTO FUNCIONALIDADE (id, nome) VALUES (3, 'Fechar Caixa');
-INSERT INTO FUNCIONALIDADE (id, nome) VALUES (4, 'Consultar Animal');
-
-INSERT INTO PERFIL_FUNCIONALIDADE (id, id_perfil, id_funcionalidade) VALUES (1, 1, 1);
-INSERT INTO PERFIL_FUNCIONALIDADE (id, id_perfil, id_funcionalidade) VALUES (2, 2, 2);
-INSERT INTO PERFIL_FUNCIONALIDADE (id, id_perfil, id_funcionalidade) VALUES (3, 2, 3);
-INSERT INTO PERFIL_FUNCIONALIDADE (id, id_perfil, id_funcionalidade) VALUES (4, 3, 4);
-
-INSERT INTO TIPO_CONTATO (id, nome) VALUES (1, 'Celular');
 INSERT INTO ESTADO (id, nome, sigla) VALUES (1, 'Paraiba', 'PB');
-INSERT INTO CLIENTE (id, id_pessoa) VALUES (1, 2);
-INSERT INTO ENDERECO (id, logradouro, numero, cep, complemento, bairro, municipio, id_estado) VALUES (1, 'Rua teste', '1', '58301000', 'sem complemento', 'bairro', 'municipio', 1);
-INSERT INTO CONTATO (id, valor, id_tipo_contato, observacao) VALUES (1, '83988888888', 1, 'Observação');
 
-
-INSERT INTO ANIMAL (id, id_cliente, nome, sexo, data_nascimento, id_especie, id_pelagem, id_raca) VALUES (1, 1, 'Animal 1', 'M', '2020-02-18', 1, 1, 1);
-INSERT INTO ANIMAL (id, id_cliente, nome, sexo, data_nascimento, id_especie, id_pelagem, id_raca) VALUES (2, 1, 'Animal 2', 'M', '2020-02-18', 1, 1, 1);
-
-
-INSERT INTO PESSOA_CONTATO (id_pessoa, id_contato) VALUES (2, 1);
-INSERT INTO PESSOA_ENDERECO (id_pessoa, id_endereco) VALUES (2, 1);
-
-INSERT INTO MARCA (id, id_empresa, nome) VALUES (1, 1, 'Marca 1');
-
-INSERT INTO GRUPO_PRODUTO (id, id_empresa, nome, status, id_grupo_pai) VALUES (1, 1, 'Grupo 1', true, null);
-INSERT INTO GRUPO_PRODUTO (id, id_empresa, nome, status, id_grupo_pai ) VALUES (2, 1, 'Grupo 2', true, 1);
-INSERT INTO GRUPO_PRODUTO (id, id_empresa, nome, status, id_grupo_pai ) VALUES (3, 1, 'Grupo 3', true, 2);
-INSERT INTO GRUPO_PRODUTO (id, id_empresa, nome, status, id_grupo_pai ) VALUES (4, 1, 'Grupo 4', false, 1);
-INSERT INTO GRUPO_PRODUTO (id, id_empresa, nome, status, id_grupo_pai ) VALUES (5, 1, 'Grupo 5', true, 1);
-INSERT INTO GRUPO_PRODUTO (id, id_empresa, nome, status, id_grupo_pai ) VALUES (6, 1, 'Grupo 6', false, null);
