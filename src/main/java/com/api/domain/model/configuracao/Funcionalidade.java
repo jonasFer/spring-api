@@ -1,7 +1,6 @@
 package com.api.domain.model.configuracao;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -12,8 +11,6 @@ public class Funcionalidade {
     @OneToMany(mappedBy = "funcionalidade")
     private List<PerfilFuncionalidade> perfilFuncionalidade;
     private String nome;
-    @Column(name = "data_criacao")
-    private LocalDateTime dataCriacao = LocalDateTime.now();
 
     public Long getId() {
         return id;

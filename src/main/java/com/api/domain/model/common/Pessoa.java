@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -42,6 +41,4 @@ public class Pessoa {
             joinColumns = @JoinColumn(name = "id_pessoa"),
             inverseJoinColumns = @JoinColumn(name = "id_contato"))
     private List<Contato> contatos;
-    @Column(name = "data_criacao")
-    private LocalDateTime dataCriacao = LocalDateTime.now();
 }

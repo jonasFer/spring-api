@@ -18,11 +18,8 @@ public class ClienteDto {
     private Long id;
     private String nome;
     private Long tipo;
-    @JsonProperty("cpf_cnpj")
     private String cpfCnpj;
-    @JsonProperty("rg_ie")
     private String rgIe;
-    @JsonProperty("data_nascimento")
     private String dataNascimento;
     private List<ContatoDto> contatos;
     private List<EnderecoDto> enderecos;

@@ -19,7 +19,6 @@ public class AnimalDto {
     @NotNull
     private String nome;
     private String sexo;
-    @JsonProperty("data_nascimento")
     private String dataNascimento;
     private Long especie;
     private Long raca;

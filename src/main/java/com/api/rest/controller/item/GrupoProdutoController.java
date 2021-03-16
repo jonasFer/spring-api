@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.stream.Collectors;
 
-@Api(tags = "Item / Grupo Produto", value = "pet/animal", produces = MediaType.APPLICATION_JSON_VALUE)
+@Api(tags = "Item / Grupo Produto", value = "item/grupo-produto", produces = MediaType.APPLICATION_JSON_VALUE)
 @RestController
 @RequestMapping("item/grupo-produto")
 public class GrupoProdutoController {

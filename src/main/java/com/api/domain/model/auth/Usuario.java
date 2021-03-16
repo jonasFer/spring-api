@@ -5,7 +5,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 
@@ -19,8 +18,6 @@ public class Usuario implements UserDetails {
     private Pessoa pessoa;
     private String email;
     private String password;
-    @Column(name = "data_criacao")
-    private LocalDateTime dataCriacao = LocalDateTime.now();
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "usuario_perfil",

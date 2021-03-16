@@ -4,7 +4,6 @@ import com.api.domain.model.common.Empresa;
 import lombok.*;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
 @Data
@@ -19,6 +18,4 @@ public class Especie {
     @JoinColumn(name ="id_empresa", nullable = false)
     private Empresa empresa;
     private String nome;
-    @Column(name = "data_criacao")
-    private LocalDateTime dataCriacao = LocalDateTime.now();
 }

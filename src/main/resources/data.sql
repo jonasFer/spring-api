@@ -201,9 +201,21 @@ CREATE TABLE IF NOT EXISTS produto
     id_empresa       bigint       not null,
     id_grupo_produto bigint,
     id_marca         bigint,
+    quantidade_minima decimal(19, 2),
+    quantidade_maxima decimal(19, 2),
+    controla_estoque  boolean      not null,
     FOREIGN KEY (id_empresa) REFERENCES empresa (id),
     FOREIGN KEY (id_grupo_produto) REFERENCES grupo_produto (id),
     FOREIGN KEY (id_marca) REFERENCES marca (id)
+);
+
+CREATE TABLE IF NOT EXISTS produto_estoque
+(
+    id              bigint NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    id_produto       bigint,
+    estoque_atual   decimal(19,2),
+    data_criacao timestamp default current_timestamp,
+    FOREIGN KEY (id_produto) REFERENCES produto (id)
 );
 
 CREATE TABLE IF NOT EXISTS usuario

@@ -2,11 +2,19 @@ package com.api.domain.model.item;
 
 import com.api.domain.model.common.Empresa;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Produto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,7 +26,7 @@ public class Produto {
     private Empresa empresa;
 
     @Column(nullable = false)
-    private Integer tipoProduto;
+    private Long tipoProduto;
 
     @Column(nullable = true)
     private Long gtin;
@@ -42,4 +50,14 @@ public class Produto {
 
     @Column(nullable = false)
     private Boolean status;
+
+    @Column(columnDefinition = "boolean default false")
+    private Boolean controlaEstoque;
+
+    private BigDecimal quantidadeMinima;
+
+    private BigDecimal quantidadeMaxima;
+
+    @OneToOne(mappedBy = "produto")
+    private ProdutoEstoque produtoEstoque;
 }

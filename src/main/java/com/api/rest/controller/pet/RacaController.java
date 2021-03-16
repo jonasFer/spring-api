@@ -45,7 +45,7 @@ public class RacaController {
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public PageDto all(
-            @PageableDefault(sort = "dataCriacao", direction = Sort.Direction.ASC, page = 0, size = 10) Pageable pageable
+            Pageable pageable
     ) {
         List<RacaDto> list = racaService
                 .all(pageable)

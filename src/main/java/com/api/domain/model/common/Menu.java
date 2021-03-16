@@ -1,7 +1,6 @@
 package com.api.domain.model.common;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,8 +11,6 @@ public class Menu {
     private Long id;
     @Column
     private String nome;
-    @Column(name = "data_criacao")
-    private LocalDateTime dataCriacao = LocalDateTime.now();
     @ManyToOne
     @JoinColumn(name="id_menu_pai", nullable=true)
     private Menu menuPai;

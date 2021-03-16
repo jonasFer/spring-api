@@ -4,7 +4,6 @@ import com.api.domain.model.common.Empresa;
 import com.api.domain.model.configuracao.PerfilFuncionalidade;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -18,8 +17,6 @@ public class Perfil {
     private String nome;
     @OneToMany(mappedBy = "perfil")
     private List<PerfilFuncionalidade> perfilFuncionalidades;
-    @Column(name = "data_criacao")
-    private LocalDateTime dataCriacao = LocalDateTime.now();
 
     public Long getId() {
         return id;

@@ -8,9 +8,6 @@ import com.api.service.ClienteService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.repository.query.Param;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,7 +32,7 @@ public class ClienteController {
     }
 
     @GetMapping
-    public ResponseEntity<List<ClienteLiteDto>> all(@Valid ClienteParam params,  @PageableDefault(sort = "dataCriacao", direction = Sort.Direction.ASC, page = 0, size = 10) Pageable paginacao) {
+    public ResponseEntity<List<ClienteLiteDto>> all(@Valid ClienteParam params, Pageable paginacao) {
         return ResponseEntity.ok(service.findAll(params, paginacao).stream().map(c -> builder.buildLiteDtoFromEntity(c)).collect(Collectors.toList()));
     }
 }

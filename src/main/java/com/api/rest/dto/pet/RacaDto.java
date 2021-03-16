@@ -1,6 +1,5 @@
 package com.api.rest.dto.pet;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,7 +16,6 @@ public class RacaDto {
     private Long id;
 
     @NotNull
-    @JsonProperty("id_especie")
     private Long idEspecie;
 
     private String especie;

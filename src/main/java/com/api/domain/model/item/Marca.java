@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
-import java.time.LocalDateTime;
 
 @Entity
 @Data
@@ -30,8 +29,4 @@ public class Marca {
     @NotEmpty(message = "Campo nome não pode estar vazio")
     @Column(nullable = false)
     private String nome;
-
-    @JsonIgnore
-    @Column(name = "data_criacao")
-    private LocalDateTime dataCriacao = LocalDateTime.now();
 }
